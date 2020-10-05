@@ -3,6 +3,7 @@ EXM=example1
 rm -rf dumps/${EXM}
 rm -rf logs/${EXM}
 rm -rf snaps/${EXM}
+rm -f models/${EXM}.jl
 rm -f predictions/${EXM}_pred.csv
 
 FX="0.5*x**3 - 2*x**2 - 3*x - 1"
@@ -16,7 +17,10 @@ python ../../../xgboost/fit_func_miso.py \
   --trainds datasets/${EXM}_train.csv \
   --modelout models/${EXM}.jl \
   --valds datasets/${EXM}_val.csv \
-  --xgbparams "'n_estimators':20, 'max_depth':5, 'booster':'dart'"
+  --metrics logloss error \
+  --earlystop 5 \
+  --dumpout dumps/example1 \
+  --xgbparams "'n_estimators':20, 'max_depth':5, 'booster':'dart', 'verbosity':0"
 
 python ../../common/fx_gen.py --dsout datasets/${EXM}_test.csv  --funcx "$FX" --xbegin $XB --xend $XE --xstep 0.0475
 
@@ -26,6 +30,6 @@ python ../../../xgboost/predict_func_miso.py \
  --predictionout predictions/${EXM}_pred.csv
 
 python ../../common/fx_scatter.py --ds datasets/${EXM}_test.csv --prediction predictions/${EXM}_pred.csv
-#python ../common/fx_scatter.py --ds datasets/${EXM}_test.csv --prediction predictions/${EXM}_pred.csv --savefig media/${EXM}.png
+#python ../../common/fx_scatter.py --ds datasets/${EXM}_test.csv --prediction predictions/${EXM}_pred.csv --savefig media/${EXM}.png
 
-#python ../fx_video.py --modelsnap snaps/${EXM} --ds datasets/${EXM}_test.csv --savevideo media/${EXM}_test.gif
+python ../../../common/dumps_scatter.py --dump dumps/${EXM}
