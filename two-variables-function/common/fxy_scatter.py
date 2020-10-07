@@ -88,7 +88,7 @@ if __name__ == "__main__":
     plt.rcParams.update({'font.size': args.label_font_size})
     fig = plt.figure()
 
-    ax1 = fig.add_subplot(211, projection='3d')
+    ax1 = fig.add_subplot(121, projection='3d')
     ax1.set_xlabel(args.x_axis_label, fontdict={'size': args.label_font_size})
     ax1.set_ylabel(args.y_axis_label, fontdict={'size': args.label_font_size})
     ax1.set_zlabel(args.z_axis_label, fontdict={'size': args.label_font_size})
@@ -99,7 +99,7 @@ if __name__ == "__main__":
         for row in csv_reader:
             ax1.scatter(float(row[0]), float(row[1]), float(row[2]), color='blue', s=1, marker='.')
 
-    ax2 = fig.add_subplot(212, projection='3d')
+    ax2 = fig.add_subplot(122, projection='3d')
     ax2.set_xlabel(args.x_axis_label, fontdict={'size': args.label_font_size})
     ax2.set_ylabel(args.y_axis_label, fontdict={'size': args.label_font_size})
     ax2.set_zlabel(args.z_axis_label, fontdict={'size': args.label_font_size})

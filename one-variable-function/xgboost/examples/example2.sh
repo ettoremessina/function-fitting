@@ -22,7 +22,8 @@ python ../../common/fx_gen.py --dsout datasets/${EXM}_test.csv  --funcx "$FX" --
 python ../../../xgboost/predict_func_miso.py \
  --model models/${EXM}.jl \
  --ds datasets/${EXM}_test.csv \
- --predictionout predictions/${EXM}_pred.csv
+ --predictionout predictions/${EXM}_pred.csv \
+ --measures mean_absolute_error mean_squared_error
 
 python ../../common/fx_scatter.py \
   --ds datasets/${EXM}_test.csv \
