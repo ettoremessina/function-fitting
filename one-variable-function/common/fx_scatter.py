@@ -5,7 +5,7 @@ import os
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=textwrap.dedent('''\
-    '%(prog)s shows two overlapped x/y scatter graphs:
+    %(prog)s shows two overlapped x/y scatter graphs:
     the blue one is the input dataset,
     the red one is the prediction
     '''))
@@ -57,21 +57,21 @@ if __name__ == "__main__":
                         dest='width',
                         required=False,
                         default=9.60,
-                        help='width of animated git (in inch)')
+                        help='width of whole figure (in inch)')
 
     parser.add_argument('--height',
                         type=float,
                         dest='height',
                         required=False,
                         default=5.40,
-                        help='height of animated git (in inch)')
+                        help='height of whole figure (in inch)')
 
     parser.add_argument('--savefig',
                         type=str,
                         dest='save_figure_filename',
                         required=False,
                         default='',
-                        help='if present, the chart is saved on a file instead to be shown on screen')
+                        help='if present, the figure is saved on a file instead to be shown on screen')
 
     args = parser.parse_args()
 
