@@ -8,4 +8,4 @@ The goal of this repository is to share a suite of programs written in Python to
 [one-variable-function](./one-variable-function) contains tools and examples about the fitting of a real-valued scalar function of one real-valued variable.
 
 ## Two Variables Function
-[one-variable-function](./two-variables-function) contains tools and examples about the fitting of a real-valued scalar function of two real-valued variables.
+[two-variable-function](./two-variables-function) contains tools and examples about the fitting of a real-valued scalar function of two real-valued variables.
