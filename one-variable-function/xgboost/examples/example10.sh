@@ -15,19 +15,21 @@ python ../../common/fx_gen.py --dsout datasets/${EXM}_val.csv  --funcx "$FX" --x
 python ../../../xgboost/fit_func_miso.py \
  --trainds datasets/${EXM}_train.csv \
  --modelout models/${EXM}.jl \
- --valds datasets/${EXM}_val.csv
+ --valds datasets/${EXM}_val.csv \
+ --xgbparams "'n_estimators': 100, 'max_depth': 7"
 
 python ../../common/fx_gen.py --dsout datasets/${EXM}_test.csv  --funcx "$FX" --xbegin $XB --xend $XE --xstep 0.00073
 
 python ../../../xgboost/predict_func_miso.py \
  --model models/${EXM}.jl \
  --ds datasets/${EXM}_test.csv \
- --predictionout predictions/${EXM}_pred.csv
+ --predictionout predictions/${EXM}_pred.csv \
+ --measures mean_absolute_error mean_squared_error
 
 python ../../common/fx_scatter.py \
   --ds datasets/${EXM}_test.csv \
   --prediction predictions/${EXM}_pred.csv \
-  --title "XGBoost (all properties defaulted)" \
+  --title "XGBoost (estimators: 100, max depth: 7)" \
   --xlabel "x" \
   --ylabel "y=x sin(1/x)"
 
