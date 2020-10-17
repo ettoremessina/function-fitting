@@ -1,4 +1,4 @@
-# One Variables Function
+# One Variable Function
 This part of current repository contains a set of tools and examples to deal with the function fitting of a real-valued scalar function of one real-valued variable.
 
 ## Common

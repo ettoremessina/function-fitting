@@ -5,5 +5,5 @@ Please go to [xgboost](../../xgboost) folder on this repository to see the XGBoo
 
 Please visit [here](https://computationalmindset.com/en/machine-learning/fitting-with-configurable-xgboost.html) for details.
 
-## examples
+## Examples
 [examples](./examples) contains shell scripts to show how to use in cascade the various programs of this repository to perform regressions of real-valued scalar functions of one real-valued variable using the XGBoost regressor.
