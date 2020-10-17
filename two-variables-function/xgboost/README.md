@@ -4,3 +4,6 @@ This part of current repository contains a set of Python examples to call the XG
 Please go to [xgboost](../../xgboost) folder on this repository to see the XGBoost regressor wrapper scripts.
 
 Please visit [here](https://computationalmindset.com/en/machine-learning/fitting-with-configurable-xgboost.html) for details.
+
+## examples
+[examples](./examples) contains shell scripts to show how to use in cascade the various programs of this repository to perform regressions of real-valued scalar functions of two real-valued variables using the XGBoost regressor.
