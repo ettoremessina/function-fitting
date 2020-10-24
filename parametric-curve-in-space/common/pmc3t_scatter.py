@@ -1,11 +1,12 @@
 import argparse, textwrap
 import csv
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 import os
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=textwrap.dedent('''\
-    %(prog)s shows two overlapped x/y scatter graphs on plane:
+    %(prog)s shows two overlapped x/y/z scatter graphs in space:
     the blue one is the input dataset of parametric curve,
     the red one is the prediction of parametric curve
     '''))
@@ -78,7 +79,8 @@ if __name__ == "__main__":
     print("#### Started %s ####" % os.path.basename(__file__));
 
     plt.rcParams.update({'font.size': args.label_font_size})
-    fig, ax = plt.subplots(figsize=(args.width, args.height))
+    fig = plt.figure(figsize=(args.width, args.height))
+    ax = fig.add_subplot(111, projection='3d')
 
     ax.set_title(args.figure_title, fontdict={'size': args.label_font_size, 'color': 'orange'})
     ax.set_xlabel(args.x_axis_label, fontdict={'size': args.label_font_size})
@@ -88,13 +90,13 @@ if __name__ == "__main__":
         csv_reader = csv.reader(csv_file, delimiter=',')
         next(csv_reader, None)
         for row in csv_reader:
-            plt.scatter(float(row[1]), float(row[2]), color='blue', s=1, marker='.')
+            ax.scatter(float(row[1]), float(row[2]), float(row[3]), color='blue', s=1, marker='.')
 
     with open(args.prediction_data_filename) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         next(csv_reader, None)
         for row in csv_reader:
-            plt.scatter(float(row[1]), float(row[2]), color='red', s=2, marker='.')
+            ax.scatter(float(row[1]), float(row[2]),  float(row[3]), color='red', s=2, marker='.')
 
     plt.title(args.figure_title);
     if args.save_figure_filename:
