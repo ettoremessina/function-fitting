@@ -6,7 +6,7 @@ import os
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='%(prog)s generates a synthetic dataset file calling a two-variables real function on a rectangle')
 
-    parser.add_argument('--version', action='version', version='%(prog)s 1.0.1')
+    parser.add_argument('--version', action='version', version='%(prog)s 1.1.0')
 
     parser.add_argument('--dsout',
                         type=str,
@@ -62,12 +62,27 @@ if __name__ == "__main__":
                         default=0.01,
                         help='step range of y (default: 0.01)')
 
+    parser.add_argument('--noise',
+                        type=str,
+                        dest='noise_body',
+                        required=False,
+                        help='noise(sz) body (lamba format)')
+
     args = parser.parse_args()
 
     print("#### Started %s ####" % os.path.basename(__file__));
 
     x_values = np.arange(args.range_xbegin, args.range_xend, args.range_xstep, dtype=float)
     y_values = np.arange(args.range_ybegin, args.range_yend, args.range_ystep, dtype=float)
+
+    if args.noise_body:
+        noise_sz = eval('lambda sz: ' + args.noise_body)
+        noise =  noise_sz(len(x_values) * len(y_values))
+        noise = np.array(noise)
+    else:
+        noise = np.array([0.0] * (len(x_values) * len(y_values)))
+    noise.shape = (len(x_values), len(y_values))
+
     func_xy = eval('lambda x, y: ' + args.func_xy_body)
     csv_ds_output_file = open(args.ds_output_filename, 'w')
     with csv_ds_output_file:
@@ -75,7 +90,11 @@ if __name__ == "__main__":
         writer.writerow(['x', 'y', 'z'])
         for i in range(0, x_values.size):
             for j in range(0, y_values.size):
-                writer.writerow([x_values[i], y_values[j], func_xy(x_values[i], y_values[j])])
+                writer.writerow([
+                x_values[i],
+                y_values[j],
+                func_xy(x_values[i], y_values[j]) + noise[i, j]
+                ])
     print("Generated two-variables scalar function synthetic dataset file '%s'" % args.ds_output_filename)
 
     print("#### Terminated %s ####" % os.path.basename(__file__));

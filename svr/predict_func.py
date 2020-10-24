@@ -4,7 +4,7 @@ import time
 import os
 import numpy as np
 import pandas as pd
-import xgboost as xgb
+import sklearn.linear_model as skllm
 import joblib as jl
 import sklearn.metrics as sklm
 from support.regressor_support import read_csv_dataset
@@ -24,14 +24,15 @@ def save_prediction(df_independent, prediction):
             row = []
             for j in range(0, len(df_independent.columns)):
                 row.append(df_independent.iat[i, j])
-            row.append(prediction[i])
+            for p in prediction[i]:
+                row.append(p)
             writer.writerow(row)
     print("Generated one-variable function predicted data '%s'" % args.prediction_data_file)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='%(prog)s makes prediction of the values of a multiple-input single-output (scalar) function with a pretrained XGBoost model')
+    parser = argparse.ArgumentParser(description='%(prog)s makes prediction of the values of a multiple-input multiple-output function with a pretrained Standard Vector Regressor model')
 
-    parser.add_argument('--version', action='version', version='%(prog)s 1.0.1')
+    parser.add_argument('--version', action='version', version='%(prog)s 1.0.0')
 
     parser.add_argument('--model',
                         type=str,
@@ -44,6 +45,12 @@ if __name__ == "__main__":
                         dest='df_prediction',
                         required=True,
                         help='dataset file (csv format)')
+
+    parser.add_argument('--outputdim',
+                        type=int,
+                        dest='num_of_dependent_columns',
+                        required=True,
+                        help='Output dimension (alias the number of dependent columns, that must be last columns)')
 
     parser.add_argument('--predictionout',
                         type=str,
@@ -63,7 +70,7 @@ if __name__ == "__main__":
 
     print("#### Started %s ####" % os.path.basename(__file__));
 
-    head, df_independent, df_dependent = read_csv_dataset(args.df_prediction, 1)
+    head, df_independent, df_dependent = read_csv_dataset(args.df_prediction, args.num_of_dependent_columns)
 
     model = jl.load(args.model_file)
 
@@ -71,6 +78,9 @@ if __name__ == "__main__":
     prediction = model.predict(df_independent)
     elapsed_time = time.time() - start_time
     print ("Predicting time:", time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))
+
+    score = model.score(df_independent, df_dependent)
+    print ("Score:", score)
 
     compute_measures(df_dependent, prediction)
     save_prediction(df_independent, prediction)
