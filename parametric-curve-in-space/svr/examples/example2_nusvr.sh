@@ -37,4 +37,4 @@ python ../../../svr/predict_func.py \
  --predictionout predictions/${EXM}_pred.csv
 
 python ../../common/pmc3t_scatter.py --ds datasets/${EXM}_test.csv --prediction predictions/${EXM}_pred.csv
-#python ../../common/pmc2t_scatter.py --ds datasets/${EXM}_test.csv --prediction predictions/${EXM}_pred.csv --savefig media/${EXM}.png
+#python ../../common/pmc3t_scatter.py --ds datasets/${EXM}_test.csv --prediction predictions/${EXM}_pred.csv --savefig media/${EXM}.png

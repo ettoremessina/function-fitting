@@ -1,11 +1,12 @@
 #!/bin/sh
-EXM=example1
+EXM=example2
 rm -f models/${EXM}.jl
 rm -f predictions/${EXM}_pred.csv
 
-#Archimedean spiral
-FXT="0.1 * t * np.cos(t)"
-FYT="0.1 * t * np.sin(t)"
+#Bernoulli's spiral
+FXT="np.exp(0.1 * t) * np.cos(t)"
+FYT="np.exp(0.1 * t) * np.sin(t)"
+NS="0.1 * np.random.normal(0.0, 1.0, size=sz)"
 
 TB=0.0
 TE=20.0
@@ -13,13 +14,13 @@ TE=20.0
 python ../../common/pmc2t_gen.py \
   --dsout datasets/${EXM}_train.csv \
   --funcxt "$FXT" --funcyt "$FYT" \
-  --tbegin $TB --tend $TE --tstep 0.01
+  --tbegin $TB --tend $TE --tstep 0.01 \
+  --xnoise "$NS" --ynoise "$NS"
 
 python ../../../xgboost/fit_func_mimo.py \
   --trainds datasets/${EXM}_train.csv \
   --outputdim 2 \
-  --modelout models/${EXM}.jl \
-  --xgbparams "'n_estimators':100, 'max_depth':5, 'booster':'dart'"
+  --modelout models/${EXM}.jl
 
 python ../../common/pmc2t_gen.py \
   --dsout datasets/${EXM}_test.csv \

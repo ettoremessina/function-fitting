@@ -1,5 +1,5 @@
 #!/bin/sh
-EXM=example1_esvr
+EXM=example1
 rm -f models/${EXM}.jl
 rm -f predictions/${EXM}_pred.csv
 
@@ -16,18 +16,18 @@ python ../../common/pmc3t_gen.py \
   --funcxt "$FXT" --funcyt "$FYT" --funczt "$FZT" \
   --tbegin $TB --tend $TE --tstep 0.01
 
-python ../../../svr/fit_func_esvr.py \
+python ../../../xgboost/fit_func_mimo.py \
   --trainds datasets/${EXM}_train.csv \
   --outputdim 3 \
   --modelout models/${EXM}.jl \
-  --svrparams "'kernel': 'rbf', 'C': 100, 'gamma': 0.1, 'epsilon': 0.1"
+  --xgbparams "'n_estimators':100, 'max_depth':5, 'booster':'dart'"
 
-python ../../common/pmc3t_gen.py \
-  --dsout datasets/${EXM}_test.csv \
-  --funcxt "$FXT" --funcyt "$FYT" --funczt "$FZT" \
-  --tbegin $TB --tend $TE --tstep 0.0475
+  python ../../common/pmc3t_gen.py \
+    --dsout datasets/${EXM}_test.csv \
+    --funcxt "$FXT" --funcyt "$FYT" --funczt "$FZT" \
+    --tbegin $TB --tend $TE --tstep 0.0475
 
-python ../../../svr/predict_func.py \
+python ../../../xgboost/predict_func_mimo.py \
  --model models/${EXM}.jl \
  --ds datasets/${EXM}_test.csv \
  --outputdim 3 \

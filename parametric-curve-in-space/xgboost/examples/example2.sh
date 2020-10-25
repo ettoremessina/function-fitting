@@ -1,33 +1,34 @@
 #!/bin/sh
-EXM=example1_esvr
+EXM=example2
 rm -f models/${EXM}.jl
 rm -f predictions/${EXM}_pred.csv
 
-#Archimedean spiral on the space
-FXT="0.1 * t * np.cos(t)"
-FYT="0.1 * t * np.sin(t)"
-FZT="t"
+#Twisted cubic
+FXT="t"
+FYT="t ** 2"
+FZT="t ** 3"
+NS="0.1 * np.random.normal(0.0, 1.0, size=sz)"
 
 TB=0.0
-TE=20.0
+TE=2.0
 
 python ../../common/pmc3t_gen.py \
   --dsout datasets/${EXM}_train.csv \
   --funcxt "$FXT" --funcyt "$FYT" --funczt "$FZT" \
-  --tbegin $TB --tend $TE --tstep 0.01
+  --tbegin $TB --tend $TE --tstep 0.001 \
+  --xnoise "$NS" --ynoise "$NS" --znoise "$NS"
 
-python ../../../svr/fit_func_esvr.py \
+python ../../../xgboost/fit_func_mimo.py \
   --trainds datasets/${EXM}_train.csv \
   --outputdim 3 \
-  --modelout models/${EXM}.jl \
-  --svrparams "'kernel': 'rbf', 'C': 100, 'gamma': 0.1, 'epsilon': 0.1"
+  --modelout models/${EXM}.jl
 
 python ../../common/pmc3t_gen.py \
   --dsout datasets/${EXM}_test.csv \
   --funcxt "$FXT" --funcyt "$FYT" --funczt "$FZT" \
-  --tbegin $TB --tend $TE --tstep 0.0475
+  --tbegin $TB --tend $TE --tstep 0.00475
 
-python ../../../svr/predict_func.py \
+python ../../../xgboost/predict_func_mimo.py \
  --model models/${EXM}.jl \
  --ds datasets/${EXM}_test.csv \
  --outputdim 3 \
