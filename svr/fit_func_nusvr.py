@@ -33,12 +33,6 @@ if __name__ == "__main__":
                         required=True,
                         help='Output model file')
 
-    parser.add_argument('--dumpout',
-                        type=str,
-                        dest='dumpout_path',
-                        required=False,
-                        help='Dump directory (directory to store metric values)')
-
     parser.add_argument('--svrparams',
                         type=str,
                         dest='svr_params',
