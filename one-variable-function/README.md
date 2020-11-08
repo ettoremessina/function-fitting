@@ -6,6 +6,11 @@ This part of current repository contains a set of tools and examples to deal wit
 
 Please visit [here](https://computationalmindset.com/en/machine-learning/common-tools-for-function-fitting.html) for details.
 
+## SVR
+[svr](./svr) contains contains a set of Python examples to call the Support Vector Regressor wrapper in order to fit real-valued scalar functions of one real-valued variable using SVR.
+
+Please visit [here](https://computationalmindset.com/en/machine-learning/fitting-with-configurable-svr.html) for details.
+
 ## XGBoost
 [xgboost](./xgboost) contains contains a set of Python examples to call the XGBoost regressor wrapper in order to fit real-valued scalar functions of one real-valued variable using the XGBoost regressor.
 
