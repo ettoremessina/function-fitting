@@ -46,6 +46,13 @@ if __name__ == "__main__":
                         default='',
                         help='label of y axis')
 
+    parser.add_argument('--zlabel',
+                        type=str,
+                        dest='z_axis_label',
+                        required=False,
+                        default='',
+                        help='label of z axis')
+
     parser.add_argument('--labelfontsize',
                         type=int,
                         dest='label_font_size',
@@ -85,6 +92,7 @@ if __name__ == "__main__":
     ax.set_title(args.figure_title, fontdict={'size': args.label_font_size, 'color': 'orange'})
     ax.set_xlabel(args.x_axis_label, fontdict={'size': args.label_font_size})
     ax.set_ylabel(args.y_axis_label, fontdict={'size': args.label_font_size})
+    ax.set_zlabel(args.z_axis_label, fontdict={'size': args.label_font_size})
 
     with open(args.dataset_filename) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')

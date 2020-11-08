@@ -34,5 +34,13 @@ python ../../../svr/predict_func.py \
  --measures mean_absolute_error mean_squared_error \
  --predictionout predictions/${EXM}_pred.csv
 
-python ../../common/pmc3t_scatter.py --ds datasets/${EXM}_test.csv --prediction predictions/${EXM}_pred.csv
+python ../../common/pmc3t_scatter.py \
+  --ds datasets/${EXM}_test.csv \
+  --prediction predictions/${EXM}_pred.csv \
+  --title "e-SVR (kernel: rbf, C: 100, gamma: 0.1, epsilon: 0.1)" \
+  --xlabel x \
+  --ylabel y \
+  --zlabel z
+
+
 #python ../../common/pmc3t_scatter.py --ds datasets/${EXM}_test.csv --prediction predictions/${EXM}_pred.csv --savefig media/${EXM}.png
