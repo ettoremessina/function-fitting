@@ -1,11 +1,11 @@
 #!/bin/sh
-EXM=example2_pycaret
+EXM=example3_pycaret
 rm -f models/${EXM}.pkl
 rm -f predictions/${EXM}_pred.csv
 
 FX="np.exp(np.sin(x))"
-XB=-6.0
-XE=6.0
+XB=-8.0
+XE=8.0
 
 python ../../common/fx_gen.py --dsout datasets/${EXM}_train.csv --funcx "$FX" --xbegin $XB --xend $XE --xstep 0.01
 
@@ -15,7 +15,7 @@ python ../../../pycaret/fit_func.py \
   --metric MSE \
   --modelout models/${EXM} \
   --setupparams "'train_size': 0.8, 'session_id': 987654321, 'log_experiment': True, 'experiment_name': '${EXM}'" \
-  --compareparams "'exclude': []"
+  --compareparams "'exclude': ['dummy']"
 
 python ../../common/fx_gen.py --dsout datasets/${EXM}_test.csv  --funcx "$FX" --xbegin $XB --xend $XE --xstep 0.0475
 

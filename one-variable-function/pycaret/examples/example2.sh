@@ -15,7 +15,7 @@ python ../../../pycaret/fit_func.py \
   --metric MSE \
   --modelout models/${EXM} \
   --setupparams "'train_size': 0.8, 'session_id': 987654321, 'log_experiment': True, 'experiment_name': '${EXM}'" \
-  --compareparams "'exclude': []"
+  --compareparams "'exclude': ['dummy']"
 
 python ../../common/fx_gen.py --dsout datasets/${EXM}_test.csv  --funcx "$FX" --xbegin $XB --xend $XE --xstep 0.0475
 
