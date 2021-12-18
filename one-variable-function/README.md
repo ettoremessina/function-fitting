@@ -19,4 +19,4 @@ Please visit [here](https://computationalmindset.com/en/machine-learning/fitting
 ## PyCaret
 [pycaret](./pycaret) contains contains a set of Python examples to call the PyCaret regressor wrapper in order to fit real-valued scalar functions of one real-valued using the PyCaret.
 
-Please visit [PyCaret on Computational Mindset](file:///home/ettore/emware/front/websites/local.computationalmindset.com/en/machine-learning/fitting-functions-with-pycaret.html) for details.
+Please visit [PyCaret on Computational Mindset](https://computationalmindset.com/en/machine-learning/fitting-functions-with-pycaret.html) for details.
