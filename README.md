@@ -1,5 +1,5 @@
 # Function Fitting
-The goal of this repository is to share a suite of programs written in Python to deal with the function fitting: it contains both machine and deep learning solutions, tools and examples. Namely, regarding deep learning, it contains code written for TensorFlow 2.x and for PyTorch 1.x; regarding machine learning, it contains some regressors like XGBoost.
+The goal of this repository is to share a suite of programs written in Python to deal with the function fitting: it contains both machine and deep learning solutions, tools and examples. Namely, regarding deep learning, it contains code written for TensorFlow 2.x and for PyTorch 1.x; regarding machine learning, it contains some regressors like XGBoost and PyCaret.
 
 ## Common
 [common](./common) folder contains common scripts and tools.
@@ -9,6 +9,10 @@ The goal of this repository is to share a suite of programs written in Python to
 
 ## XGBoost
 [xgboost](./xgboost) contains tools that implement the fitting of functions using XGBoost regressor.
+
+## PyCaret
+[pycaret](./pycaret) contains tools that implement the fitting of functions using PyCaret.
+Please visit [PyCaret on Computational Mindset](file:///home/ettore/emware/front/websites/local.computationalmindset.com/en/machine-learning/fitting-functions-with-pycaret.html) for details.
 
 ## One Variable Function
 [one-variable-function](./one-variable-function) contains tools and examples about the fitting of a real-valued scalar function of one real-valued variable.

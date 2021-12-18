@@ -15,3 +15,8 @@ Please visit [here](https://computationalmindset.com/en/machine-learning/fitting
 [xgboost](./xgboost) contains contains a set of Python examples to call the XGBoost regressor wrapper in order to fit real-valued scalar functions of one real-valued variable using the XGBoost regressor.
 
 Please visit [here](https://computationalmindset.com/en/machine-learning/fitting-with-configurable-xgboost.html) for details.
+
+## PyCaret
+[pycaret](./pycaret) contains contains a set of Python examples to call the PyCaret regressor wrapper in order to fit real-valued scalar functions of one real-valued using the PyCaret.
+
+Please visit [PyCaret on Computational Mindset](file:///home/ettore/emware/front/websites/local.computationalmindset.com/en/machine-learning/fitting-functions-with-pycaret.html) for details.
