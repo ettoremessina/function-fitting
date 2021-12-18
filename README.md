@@ -12,8 +12,7 @@ The goal of this repository is to share a suite of programs written in Python to
 
 ## PyCaret
 [pycaret](./pycaret) contains tools that implement the fitting of functions using PyCaret.
-
-Please visit [PyCaret on Computational Mindset](file:///home/ettore/emware/front/websites/local.computationalmindset.com/en/machine-learning/fitting-functions-with-pycaret.html) for details.
+Please visit [PyCaret-on-Computational-Mindset](file:///home/ettore/emware/front/websites/local.computationalmindset.com/en/machine-learning/fitting-functions-with-pycaret.html) for details.
 
 ## One Variable Function
 [one-variable-function](./one-variable-function) contains tools and examples about the fitting of a real-valued scalar function of one real-valued variable.
