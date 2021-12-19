@@ -26,5 +26,8 @@ python ../../../pycaret/predict_func.py \
  --measures mean_absolute_error mean_squared_error \
  --predictionout predictions/${EXM}_pred.csv
 
-python ../../common/fx_scatter.py --ds datasets/${EXM}_test.csv --prediction predictions/${EXM}_pred.csv
-#python ../../common/fx_scatter.py --ds datasets/${EXM}_test.csv --prediction predictions/${EXM}_pred.csv --savefig media/${EXM}.png
+python ../../common/fx_scatter.py \
+  --ds datasets/${EXM}_test.csv \
+  --prediction predictions/${EXM}_pred.csv \
+  --xlabel "x" \
+  --ylabel "y=$FX"
