@@ -7,7 +7,7 @@ This part of current repository contains a set of tools and examples to deal wit
 Please visit [here](https://computationalmindset.com/en/machine-learning/common-tools-for-function-fitting.html) for details.
 
 ## SVR
-[svr](./svr) contains contains a set of Python examples to call the Support Vector Regressor wrapper in order to fit real-valued scalar functions of one real-valued variable using SVR.
+[svr](./svr) contains a set of Python examples to call the Support Vector Regressor wrapper in order to fit real-valued scalar functions of one real-valued variable using SVR.
 
 Please visit [here](https://computationalmindset.com/en/machine-learning/fitting-with-configurable-svr.html) for details.
 
@@ -17,6 +17,6 @@ Please visit [here](https://computationalmindset.com/en/machine-learning/fitting
 Please visit [here](https://computationalmindset.com/en/machine-learning/fitting-with-configurable-xgboost.html) for details.
 
 ## PyCaret
-[pycaret](./pycaret) contains contains a set of Python examples to call the PyCaret regressor wrapper in order to fit real-valued scalar functions of one real-valued using the PyCaret.
+[pycaret](./pycaret) contains contains a set of Python examples to call the PyCaret regressor wrapper in order to fit real-valued scalar functions of one real-valued variable using the PyCaret.
 
 Please visit [PyCaret on Computational Mindset](https://computationalmindset.com/en/machine-learning/fitting-functions-with-pycaret.html) for details.
