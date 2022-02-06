@@ -3,15 +3,17 @@ import scipy.integrate as spi
 import matplotlib.pyplot as plt
 
 #t is the independent variable
-P = 2. #period value
-BT=-6. #initian value of t (begin)
-ET=6. #final value of t (end))
+P = 3. #period value
+BT=-6. #initian value of t (time begin)
+ET=6. #final value of t (time end)
 FS=1000. #number of discrete values of t between BT and ET
 
-f = lambda t: ((t % P) - (P / 2.)) ** 3 #the periodic real-valued function f(t) with period equal to P to simulate the dataset acquiring
+#the periodic real-valued function f(t) with period equal to P to simulate an acquired dataset
+f = lambda t: ((t % P) - (P / 2.)) ** 3
 t_range = np.arange(BT, ET, 1/FS) #all discrete values of t in the interval from BT and ET
 y_true = f(t_range) #the true f(t)
 
+#function that computes the complex fourier coefficients c-N,.., c0, .., cN
 def compute_complex_fourier_coeffs_from_discrete_set(y_dataset, N): #via Riemann sum; N is up to nthHarmonic
     result = []
     T = len(y_dataset)
@@ -21,7 +23,8 @@ def compute_complex_fourier_coeffs_from_discrete_set(y_dataset, N): #via Riemann
         result.append(cn)
     return np.array(result)
 
-def fit_func_by_fourier_series_with_complex_coeffs(t, C): #function that computes the Fourier series using an and bn coefficients
+#function that computes the complex form Fourier series using cn coefficients
+def fit_func_by_fourier_series_with_complex_coeffs(t, C):
     result = 0. + 0.j
     L = int((len(C) - 1) / 2)
     for n in range(-L, L+1):
@@ -39,11 +42,13 @@ ROWs = 1 + (maxN-1) // COLs #rows of plt
 plt.rcParams['font.size'] = 8
 fig, axs = plt.subplots(ROWs, COLs)
 fig.tight_layout(rect=[0, 0, 1, 0.95], pad=3.0)
-fig.suptitle('acquire dataset with period P=' + str(P))
+fig.suptitle('simulated dataset with period P=' + str(P))
 
 #plot, in the range from BT to ET, the true f(t) in blue and the approximation in red
 for N in range(1, maxN + 1):
-    C = compute_complex_fourier_coeffs_from_discrete_set(y_dataset, N) #C contains the list of cn complex coefficients for n in 1..N interval.
+    #C contains the list of couples of (an, bn) coefficients for n in 1..N interval.
+    C = compute_complex_fourier_coeffs_from_discrete_set(y_dataset, N)
+    #y_approx contains the discrete values of approximation obtained by the Fourier series
     y_approx = fit_func_by_fourier_series_with_complex_coeffs(t_range, C) #y_approx contains the discrete values of approximation obtained by the Fourier series
 
     row = (N-1) // COLs
