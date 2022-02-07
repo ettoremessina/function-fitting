@@ -30,4 +30,4 @@ Please visit [PyCaret on Computational Mindset](https://computationalmindset.com
 ## Fourier Series
 [demos/python/fourier-series](./demos/python/fourier-series) contains a set of demo in Python 3.x to show how to compute the Fourier series of a periodic function or discrete dataset using both real and complex forms.
 
-Please visit [PyCaret on Computational Mindset](https://computationalmindset.com/en/machine-learning/fitting-functions-with-pycaret.html) for details.
+Please visit [Fourier Series in Python](https://computationalmindset.com/en/mathematics/fourier-series-in-python.html) for details.
