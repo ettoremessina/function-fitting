@@ -26,3 +26,8 @@ Please visit [PyCaret on Computational Mindset](https://computationalmindset.com
 
 ## Two Variables Function
 [two-variable-function](./two-variables-function) contains tools and examples about the fitting of a real-valued scalar function of two real-valued variables.
+
+## Fourier Series
+[demos/python/fourier-series](./demos/python/fourier-series) contains a set of demo in Python 3.x to show how to compute the Fourier series of a periodic function or discrete dataset using both real and complex forms.
+
+Please visit [PyCaret on Computational Mindset](https://computationalmindset.com/en/machine-learning/fitting-functions-with-pycaret.html) for details.
