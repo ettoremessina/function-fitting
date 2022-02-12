@@ -50,10 +50,11 @@ fig.suptitle('simulated dataset with period P=' + str(P))
 
 #plot, in the range from BT to ET, the true f(t) in blue and the approximation in red
 for N in range(1, maxN + 1):
-    #AB contains the list of couples of (an, bn) coefficients for n in 1..N interval.
     AB = compute_real_fourier_coeffs_from_discrete_set(y_dataset, N)
-    #y_approx contains the discrete values of approximation obtained by the Fourier series
+    #AB contains the list of couples of (an, bn) coefficients for n in 1..N interval.
+
     y_approx = fit_func_by_fourier_series_with_real_coeffs(t_range, AB)
+    #y_approx contains the discrete values of approximation obtained by the Fourier series
 
     row = (N-1) // COLs
     col = (N-1) % COLs

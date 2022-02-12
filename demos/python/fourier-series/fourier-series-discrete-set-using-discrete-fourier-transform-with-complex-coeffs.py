@@ -13,13 +13,22 @@ f = lambda t: ((t % P) - (P / 2.)) ** 3
 t_range = np.arange(BT, ET, 1/FS) #all discrete values of t in the interval from BT and ET
 y_true = f(t_range) #the true f(t)
 
-#function that computes the complex fourier coefficients c-N,.., c0, .., cN
-def compute_complex_fourier_coeffs_from_discrete_set(y_dataset, N): #via Riemann sum; N is up to nthHarmonic
+#function that computes the discrete fourier transform
+def compute_discrete_fourier_transform(y_dataset, t):
+    SZ = len(y_dataset)
+    result = 0. + 0.j
+    for n in range(0, SZ):
+        result += y_dataset[n] * np.exp((-1.j * 2 * np.pi * t * n) / SZ)
+    #if SZ > 0:
+    #    result /= SZ
+    return result
+
+#function that computes the complex fourier coefficients c-N,.., c0, .., cN by Discrete Fourier Transform
+def compute_complex_fourier_coeffs_from_discrete_set_by_dft(y_dataset, N):
     result = []
-    T = len(y_dataset)
-    t = np.arange(T)
+    SZ = len(y_dataset)
     for n in range(-N, N+1):
-        cn = (1./T) * (y_dataset * np.exp(-1j * 2 * np.pi * n * t / T)).sum()
+        cn = (1./SZ) * compute_discrete_fourier_transform(y_dataset, n)
         result.append(cn)
     return np.array(result)
 
@@ -46,15 +55,14 @@ fig.suptitle('simulated dataset with period P=' + str(P))
 
 #plot, in the range from BT to ET, the true f(t) in blue and the approximation in red
 for N in range(1, maxN + 1):
-    C = compute_complex_fourier_coeffs_from_discrete_set(y_dataset, N)
-    #C contains the list of couples of (an, bn) coefficients for n in 1..N interval.
-
-    y_approx = fit_func_by_fourier_series_with_complex_coeffs(t_range, C) #y_approx contains the discrete values of approximation obtained by the Fourier series
+    C = compute_complex_fourier_coeffs_from_discrete_set_by_dft(y_dataset, N)
+    #C contains the list of cn complex coefficients for n in 1..N interval
+    y_approx = fit_func_by_fourier_series_with_complex_coeffs(t_range, C)
     #y_approx contains the discrete values of approximation obtained by the Fourier series
 
     row = (N-1) // COLs
     col = (N-1) % COLs
     axs[row, col].set_title('case N=' + str(N))
-    axs[row, col].scatter(t_range, y_true, color='blue', s=1, marker='.')
-    axs[row, col].scatter(t_range, y_approx, color='red', s=2, marker='.')
+    axs[row, col].scatter(t_range, y_true, color='blue', s=0.15, marker='o')
+    axs[row, col].scatter(t_range, y_approx, color='red', s=0.25, marker='o')
 plt.show()
