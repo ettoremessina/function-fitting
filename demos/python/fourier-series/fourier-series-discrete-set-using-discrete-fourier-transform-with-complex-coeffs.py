@@ -15,12 +15,10 @@ y_true = f(t_range) #the true f(t)
 
 #function that computes the discrete fourier transform
 def compute_discrete_fourier_transform(y_dataset, t):
-    SZ = len(y_dataset)
+    K = len(y_dataset)
     result = 0. + 0.j
-    for n in range(0, SZ):
-        result += y_dataset[n] * np.exp((-1.j * 2 * np.pi * t * n) / SZ)
-    #if SZ > 0:
-    #    result /= SZ
+    for k in range(0, K):
+        result += y_dataset[k] * np.exp((-1.j * 2 * np.pi * t * k) / K)
     return result
 
 #function that computes the complex Fourier coefficients c-N,.., c0, .., cN by Discrete Fourier Transform

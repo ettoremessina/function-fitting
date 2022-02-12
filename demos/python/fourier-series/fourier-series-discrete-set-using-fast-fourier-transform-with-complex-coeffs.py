@@ -51,7 +51,7 @@ ROWs = 1 + (maxN-1) // COLs #rows of plt
 plt.rcParams['font.size'] = 8
 fig, axs = plt.subplots(ROWs, COLs)
 fig.tight_layout(rect=[0, 0, 1, 0.95], pad=3.0)
-fig.suptitle('acquire dataset with period P=' + str(P))
+fig.suptitle('simulated dataset with period P=' + str(P))
 
 #plot, in the range from BT to ET, the true f(t) in blue and the approximation in red
 for N in range(1, maxN + 1):
