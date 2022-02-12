@@ -23,7 +23,7 @@ def compute_discrete_fourier_transform(y_dataset, t):
     #    result /= SZ
     return result
 
-#function that computes the complex fourier coefficients c-N,.., c0, .., cN by Discrete Fourier Transform
+#function that computes the complex Fourier coefficients c-N,.., c0, .., cN by Discrete Fourier Transform
 def compute_complex_fourier_coeffs_from_discrete_set_by_dft(y_dataset, N):
     result = []
     SZ = len(y_dataset)

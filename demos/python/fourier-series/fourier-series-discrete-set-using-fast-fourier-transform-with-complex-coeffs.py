@@ -14,7 +14,7 @@ f = lambda t: ((t % P) - (P / 2.)) ** 3
 t_range = np.arange(BT, ET, 1/FS) #all discrete values of t in the interval from BT and ET
 y_true = f(t_range) #the true f(t)
 
-#function that computes the complex fourier coefficients c-N,.., c0, .., cN by Discrete Fast Fourier Transform
+#function that computes the complex Fourier coefficients c-N,.., c0, .., cN by Discrete Fast Fourier Transform
 def compute_complex_fourier_coeffs_from_discrete_set_by_fft(y_dataset, N): #via tff N is up to nthHarmonic
     result = []
     y_ds_transf = spf.fft(y_dataset)
