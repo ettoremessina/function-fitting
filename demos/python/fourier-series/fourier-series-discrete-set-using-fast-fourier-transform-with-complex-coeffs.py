@@ -19,16 +19,16 @@ def compute_complex_fourier_coeffs_from_discrete_set_by_fft(y_dataset, N): #via 
     result = []
     y_ds_transf = spf.fft(y_dataset)
 
-    SZ = len(y_dataset)
+    K = len(y_dataset)
     if N % 2 == 0:
-        if N >= SZ // 2:
-            raise Exception(f"Argument exception: 'N' cannot be >= {SZ//2}")
+        if N >= K // 2:
+            raise Exception(f"Argument exception: 'N' cannot be >= {K//2}")
     else:
-        if N > SZ // 2:
-            raise Exception(f"Argument exception: 'N' cannot be > {SZ//2}")
+        if N > K // 2:
+            raise Exception(f"Argument exception: 'N' cannot be > {K//2}")
 
     for n in range(-N, N+1):
-        cn = (1./SZ) * y_ds_transf[n]
+        cn = (1./K) * y_ds_transf[n]
         result.append(cn)
     return np.array(result)
 
