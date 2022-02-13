@@ -54,7 +54,7 @@ fig.suptitle('f(t) = ((t % P) - (P / 2.)) ** 3 where P=' + str(P))
 #plot, in the range from BT to ET, the true f(t) in blue and the approximation in red
 for N in range(1, maxN + 1):
     C = compute_complex_fourier_coeffs(f, N)
-    #C contains the list of couples of (an, bn) coefficients for n in 1..N interval.
+    #C contains the list of cn complex coefficients for n in 1..N interval.
 
     y_approx = fit_func_by_fourier_series_with_complex_coeffs(t_range, C)
     #y_approx contains the discrete values of approximation obtained by the Fourier series
