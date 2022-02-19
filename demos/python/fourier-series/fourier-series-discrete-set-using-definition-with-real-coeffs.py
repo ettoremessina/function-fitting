@@ -6,11 +6,11 @@ import matplotlib.pyplot as plt
 P = 3. #period value
 BT=-6. #initian value of t (begin)
 ET=6. #final value of t (end))
-FS=1000. #number of discrete values of t between BT and ET
+FS=1000 #number of discrete values of t between BT and ET
 
 #the periodic real-valued function f(t) with period equal to P to simulate an acquired dataset
 f = lambda t: ((t % P) - (P / 2.)) ** 3
-t_range = np.arange(BT, ET, 1/FS) #all discrete values of t in the interval from BT and ET
+t_range = np.linspace(BT, ET, FS) #all discrete values of t in the interval from BT and ET
 y_true = f(t_range) #the true f(t)
 
 #function that computes the real fourier couples of coefficients (a0, 0), (a1, b1)...(aN, bN)

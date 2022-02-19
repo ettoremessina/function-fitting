@@ -7,11 +7,11 @@ import scipy.fftpack as spf
 P = 3. #period value
 BT=-6. #initian value of t (time begin)
 ET=6. #final value of t (time end)
-FS=1000. #number of discrete values of t between BT and ET
+FS=1000 #number of discrete values of t between BT and ET
 
 #the periodic complex-valued function f(t) with period equal to P
 f = lambda t: ((t % P) - P/2.) ** 2 + ((t % P) -P/2.) * 1j
-t_range = np.arange(BT, ET, 1/FS) #all discrete values of t in the interval from BT and ET
+t_range = np.linspace(BT, ET, FS) #all discrete values of t in the interval from BT and ET
 y_true = f(t_range) #the true f(t)
 y_true_real = [y.real for y in y_true]
 y_true_imag = [y.imag for y in y_true]
