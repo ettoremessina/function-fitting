@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 #x and y arr the independent variables
-PX = 3.*np.pi #period value on x
-PY = 3.*np.pi #period value on y
-BX=-4.*np.pi #initian value of x,
-BY=-4.*np.pi #initian value of y
-EX= 4.*np.pi #final value of x
-EY= 4.*np.pi #final value of y
+PX= 3.#period value on x
+PY= 3. #period value on y
+BX=-6. #initian value of x,
+BY=-6. #initian value of y
+EX= 6. #final value of x
+EY= 6. #final value of y
 FSX=80 #number of discrete values of t between BX and EX
 FSY=80 #number of discrete values of t between BY and EY
 
@@ -64,7 +64,7 @@ def fit_func2var_by_fourier_series_with_complex_coeffs(x, y, C):
 N=16
 plt.rcParams['font.size'] = 8
 fig = plt.figure()
-fig.suptitle('f(x, y) = cos(2/3 x) - sin(2/3 y) / 2')
+fig.suptitle('f(x, y) = (x mod PX) - (y mod PY) where PX=3 and PY=3')
 
 C = compute_complex_fourier_coeffs(f, N)
 #C contains the matrix of cn coefficients for (n1, n2) in [1, N] x [1, N]???

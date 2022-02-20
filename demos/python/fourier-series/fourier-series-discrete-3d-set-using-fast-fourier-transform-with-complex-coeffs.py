@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 import scipy.fftpack as spf
 
 #x and y arr the independent variables
-PX = 3.*np.pi #period value on x
-PY = 3.*np.pi #period value on y
-BX=-4.*np.pi #initian value of x,
-BY=-4.*np.pi #initian value of y
-EX= 4.*np.pi #final value of x
-EY= 4.*np.pi #final value of y
+PX= 3. #period value on x
+PY= 3. #period value on y
+BX=-6. #initian value of x,
+BY=-6 #initian value of y
+EX= 6 #final value of x
+EY= 6 #final value of y
 FSX=80 #number of discrete values of t between BX and EX
 FSY=80 #number of discrete values of t between BY and EY
 
