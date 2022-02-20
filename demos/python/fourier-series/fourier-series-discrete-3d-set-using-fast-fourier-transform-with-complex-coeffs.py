@@ -66,7 +66,7 @@ z_dataset = [[f(x, y) for y in y_period] for x in x_period]
 
 plt.rcParams['font.size'] = 8
 fig = plt.figure()
-fig.suptitle('simulated 3d periodic discrete dataset')
+fig.suptitle('simulated superficial periodic discrete dataset')
 
 #plot, in the range from BT to ET, the true f(t) in blue and the approximation in red
 N = 16
