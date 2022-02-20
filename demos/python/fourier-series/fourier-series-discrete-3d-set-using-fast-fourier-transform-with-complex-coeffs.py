@@ -1,7 +1,7 @@
 import numpy as np
 import scipy.integrate as spi
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+import scipy.fftpack as spf
 
 #x and y arr the independent variables
 PX = 3.*np.pi #period value on x
@@ -23,28 +23,25 @@ y_range = np.linspace(BY, EY, FSY)
 xyz_true = np.array([[x, y, f(x, y)] for x in x_range for y in y_range])
 #xyz_true[:, 2] contains the discrete values of f(x,y) in the rectangle
 
-#function to integrate on complex field
-def complex_dblquad(func, a, b, gfun, hfun, **kwargs):
-    def real_func(x, y):
-        return np.real(func(x, y))
-    def imag_func(x, y):
-        return np.imag(func(x, y))
-    real_integral = spi.dblquad(real_func, a, b, gfun, hfun, **kwargs)
-    imag_integral = spi.dblquad(imag_func, a, b, gfun, hfun, **kwargs)
-    integral = (real_integral[0] + 1j*imag_integral[0], real_integral[1:], imag_integral[1:])
-    return integral
+#function that computes the complex Fourier coefficients c-N,.., c0, .., cN by Discrete Fast Fourier Transform
+def compute_complex_fourier_coeffs_from_discrete_set_by_fft2(z_dataset, N): #via tff N is up to nthHarmonic
+    z_ds_transf = spf.fft2(z_dataset)
 
-#function that computes the complex fourier coefficients c-N,.., c0, .., cN
-def compute_complex_fourier_coeffs(func, N):
+    KX = len(z_dataset)
+    KY = len(z_dataset[0])
+    K = min(KX, KY)
+    if N % 2 == 0:
+        if N >= K // 2:
+            raise Exception(f"Argument exception: 'N' cannot be >= {K//2}")
+    else:
+        if N > K // 2:
+            raise Exception(f"Argument exception: 'N' cannot be > {K//2}")
+
     result = []
     for n1 in range(-N, N+1):
         nested = []
         for n2 in range(-N, N+1):
-            cn = (1./PX) * (1./PY) * complex_dblquad(
-                lambda y, x: func(x, y) \
-                    * np.exp(-1j * 2 * np.pi * n1 * x / PX) \
-                    * np.exp(-1j * 2 * np.pi * n2 * y / PX),
-                0, PX, lambda x: 0, lambda x: PY)[0]
+            cn = (1./KX) * (1./KY) * z_ds_transf[n1, n2]
             nested.append(cn)
         result.append(np.array(nested))
     return np.array(result)
@@ -61,13 +58,20 @@ def fit_func2var_by_fourier_series_with_complex_coeffs(x, y, C):
                 * np.exp(1j * 2. * np.pi * n2 * y / PY)
     return result
 
-N=16
+FDS=80 #number of discrete values of the dataset (that is long as a period)
+x_period = np.arange(0, PX, PX/FDS)
+y_period = np.arange(0, PY, PY/FDS)
+#generation of discrete dataset
+z_dataset = [[f(x, y) for y in y_period] for x in x_period]
+
 plt.rcParams['font.size'] = 8
 fig = plt.figure()
-fig.suptitle('f(x, y) = cos(2/3 x) - sin(2/3 y) / 2')
+fig.suptitle('simulated 3d periodic discrete dataset')
 
-C = compute_complex_fourier_coeffs(f, N)
-#C contains the matrix of cn coefficients for (n1, n2) in [1, N] x [1, N]???
+#plot, in the range from BT to ET, the true f(t) in blue and the approximation in red
+N = 16
+C = compute_complex_fourier_coeffs_from_discrete_set_by_fft2(z_dataset, N)
+#C contains the list of cn complex coefficients for n in 1..N interval.
 
 xyz_approx = []
 for x in x_range:
