@@ -5,7 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 #x and y arr the independent variables
 PX= 3.#period value on x
-PY= 3. #period value on y
+PY= 2. #period value on y
 BX=-6. #initian value of x,
 BY=-6. #initian value of y
 EX= 6. #final value of x
@@ -43,7 +43,7 @@ def compute_complex_fourier_coeffs(func, N):
             cn = (1./PX) * (1./PY) * complex_dblquad(
                 lambda y, x: func(x, y) \
                     * np.exp(-1j * 2 * np.pi * n1 * x / PX) \
-                    * np.exp(-1j * 2 * np.pi * n2 * y / PX),
+                    * np.exp(-1j * 2 * np.pi * n2 * y / PY),
                 0, PX, lambda x: 0, lambda x: PY)[0]
             nested.append(cn)
         result.append(np.array(nested))
@@ -61,10 +61,10 @@ def fit_func2var_by_fourier_series_with_complex_coeffs(x, y, C):
                 * np.exp(1j * 2. * np.pi * n2 * y / PY)
     return result
 
-N=16
+N=20
 plt.rcParams['font.size'] = 8
 fig = plt.figure()
-fig.suptitle('f(x, y) = (x mod PX) - (y mod PY) where PX=3 and PY=3')
+fig.suptitle('f(x, y) = (x mod PX) - (y mod PY) where PX=3 and PY=2')
 
 C = compute_complex_fourier_coeffs(f, N)
 #C contains the matrix of cn coefficients for (n1, n2) in [1, N] x [1, N]???

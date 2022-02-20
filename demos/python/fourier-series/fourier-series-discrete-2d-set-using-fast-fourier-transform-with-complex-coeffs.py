@@ -5,7 +5,7 @@ import scipy.fftpack as spf
 
 #x and y arr the independent variables
 PX= 3. #period value on x
-PY= 3. #period value on y
+PY= 2. #period value on y
 BX=-6. #initian value of x,
 BY=-6 #initian value of y
 EX= 6 #final value of x
@@ -69,7 +69,7 @@ fig = plt.figure()
 fig.suptitle('simulated superficial periodic discrete dataset')
 
 #plot, in the range from BT to ET, the true f(t) in blue and the approximation in red
-N = 16
+N = 24
 C = compute_complex_fourier_coeffs_from_discrete_set_by_fft2(z_dataset, N)
 #C contains the list of cn complex coefficients for n in 1..N interval.
 
